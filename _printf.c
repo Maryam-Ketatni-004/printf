@@ -16,34 +16,35 @@ int _printf(const char *format, ...)
 
 	va_start(ap, format);
 
-	if (!format || (format[0] == '%' && !format[2])
+	if (!format || (format[0] == '%' && !format[2]))
 		return (-1);
 	if (format[0] == '%' && format[1] == ' ' && !format[2])
 	return (-1);
 	for (pp = (char *)format; *pp; pp++)
 	{
-	init_params(&params, ap);
-	if (*pp != '%')
-	{
-	num += _putchar(*pp);
-	continue;
-	}
-	start = pp;
-	pp++;
-	while (get_flag(pp, &params))
-	{
-	pp++;
-	}
-	pp = get_width(pp, &params, ap);
-	pp = get_precision(pp, &params, ap);
-	if (get_modifier(pp, &params))
+		init_params(&params, ap);
+		if (*pp != '%')
+		{
+			num += _putchar(*pp);
+			continue;
+		}
+		start = pp;
 		pp++;
-	if (!get_specifier(pp))
-		num += print_from_to(start, pp, params.l_modifier || params.h_modifier ? pp - 1 : 0);
-	else
-		num += get_print_fun(pp, ap, &params);
+		while (get_flag(pp, &params))
+		{
+			pp++;
+		}
+		get_width(pp, &params, ap);
+		pp = get_precision(pp, &params, ap);
+		if (get_modifier(pp, &params))
+			pp++;
+		if (!get_specifier(pp))
+			num += print_from_to(start, pp,
+				params.l_modifier || params.h_modifier ? pp - 1 : 0);
+		else
+			num += get_print_func(pp, ap, &params);
 	}
 	_putchar(BUF_FLUSH);
-	ve_end(ap);
+	va_end(ap);
 	return (num);
 }
