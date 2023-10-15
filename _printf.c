@@ -1,39 +1,49 @@
 #include "main.h"
 
 /**
- * _printf - receives the main string and all the necessary parameters t
- * print a formated string
- * @f stringormat: A string containig all the desired characters
- * printReturn: A total count of the characters printed
+ * _printf-print anything
+ * @format: the format string
+ *
+ * Return: number of characters printed
  */
 
 int _printf(const char *format, ...)
 {
-	int print_char;
-	conver_t f_list[] = {
-		{"%", print_percent},
-		{"d", print_integer},
-		{"i", print_integer},
-		{"c", print_char},
-		{"s", print_string},
-		{"b", print_binary},
-		{"u", print_unsigned_integer},
-		{"o", print_octal},
-		{"x", print_hex},
-		{"X", print_HEX},
-		{"S", print_string},
-		{"p", print_pointer},
-		{"r", print_rev},
-		{"R", print_rot13},
-		{NULL, NULL},
-	};
-	va_list argumt_list;
+	int num = 0;
+	va_list ap;
+	char *pp, *start;
+	params_t params = PARAMS_INIT;
 
-	if (format == NULL)
+	va_start(ap, format);
+
+	if (!format || (format[0] == '%' && !format[2])
 		return (-1);
-
-	va_start(argumt_list, format);
-	print_char  =  format_reciever(format, f_list, argumt_list);
-	va_end(argumt_list);
-	return (print_char);
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+	return (-1);
+	for (pp = (char *)format; *pp; pp++)
+	{
+	init_params(&params, ap);
+	if (*pp != '%')
+	{
+	num += _putchar(*pp);
+	continue;
+	}
+	start = pp;
+	pp++;
+	while (get_flag(pp, &params))
+	{
+	pp++;
+	}
+	pp = get_width(pp, &params, ap);
+	pp = get_precision(pp, &params, ap);
+	if (get_modifier(pp, &params))
+		pp++;
+	if (!get_specifier(pp))
+		num += print_from_to(start, pp, params.l_modifier || params.h_modifier ? pp - 1 : 0);
+	else
+		num += get_print_fun(pp, ap, &params);
+	}
+	_putchar(BUF_FLUSH);
+	ve_end(ap);
+	return (num);
 }
