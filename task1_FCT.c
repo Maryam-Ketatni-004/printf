@@ -10,8 +10,7 @@ int print_int(va_list ptr)
 {
 	int int_input;
 
-	usigned int int_in, int_temp, i, div, isneg;
-	
+	usigned int int_in, int_temp, i, div, isneg;	
 	int_input = va_arg(ptr, int);
 
 	isneg = 0;
@@ -38,9 +37,11 @@ int print_int(va_list ptr)
 
 	for (i = 0; div > 0; div /= 10, i++)
 	{
+
 		char c = ((int_in / div) % 10) + '0';
 		
 		write(1, &c, 1);
+
 	}
 	return (i + isneg);
 }

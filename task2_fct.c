@@ -15,7 +15,7 @@ int print_binary(va_list ptr)
 
 	if (n == 0)
 	{
-		write(1, '0', 1);
+		write(1, "0", 1);
 		return (1);
 	}
 
