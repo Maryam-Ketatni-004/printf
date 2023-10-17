@@ -49,11 +49,6 @@ int _printf_helper(const char *format, va_list ptr, int charcount)
 			charcount += print_pourcentage();
 			format += 2;
 		}
-		else if ((*format == '%') && (*(format + 1) == 'i'))
-		{
-			charcount += print_int(ptr);
-			format += 2;
-		}
 		else
 		{
 			write(1, format, 1);
