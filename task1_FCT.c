@@ -10,7 +10,12 @@ int print_int(va_list ptr)
 {
 	int in;
 
+<<<<<<< HEAD
 	unsigned int int_in, int_tmp, count, dv, isn;
+=======
+	usigned int int_in, int_temp, i, div, isneg;	
+	int_input = va_arg(ptr, int);
+>>>>>>> dab140d5ce792bfa2782846e6b39129d6462981e
 
 	in = va_arg(ptr, int);
 
@@ -38,9 +43,16 @@ int print_int(va_list ptr)
 
 	for (count = 0; dv > 0; dv /= 10, count++)
 	{
+<<<<<<< HEAD
 		char c = ((int_in / dv) % 10) + '0';
 
+=======
+
+		char c = ((int_in / div) % 10) + '0';
+		
+>>>>>>> dab140d5ce792bfa2782846e6b39129d6462981e
 		write(1, &c, 1);
+
 	}
 	return (count + isn);
 }
