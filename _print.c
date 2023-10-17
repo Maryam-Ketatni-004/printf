@@ -19,7 +19,7 @@ int _printf(const char *format, ...)
 		return (-1);
 	if (format[0] == '%' && format[1] == ' ' && !format[2])
 		return (-1);
-	charcount = _print_helper(format, ptr, charcount);
+	charcount = _printf_helper(format, ptr, charcount);
 	va_end(ptr);
 	return (charcount);
 }
