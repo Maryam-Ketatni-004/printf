@@ -8,25 +8,25 @@
  */
 int print_binary(va_list ptr)
 {
-	unsigned int n = va_arg(ptr, unsigned int);
-	int charcount = 0;
-	char buffer[32];
-	int i = 0;
+	unsigned int q = va_arg(ptr, unsigned int);
+	int ch_count = 0;
+	char buf[32];
+	int count = 0;
 
-	if (n == 0)
+	if (q == 0)
 	{
-		write(1, '0', 1);
+		write(1, "0", 1);
 		return (1);
 	}
 
-	while (n > 0)
+	while (q > 0)
 	{
-		buffer[i++] = (n % 2) + '0';
-		n /= 2;
+		buf[count++] = (q % 2) + '0';
+		q /= 2;
 	}
 
-	charcount = i;
-	while (i--)
-		write(1, &buffer[i], 1);
-	return (charcount);
+	ch_count = count;
+	while (count--)
+		write(1, &buf[count], 1);
+	return (ch_count);
 }

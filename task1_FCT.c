@@ -8,39 +8,39 @@
  */
 int print_int(va_list ptr)
 {
-	int int_input;
+	int in;
 
-	usigned int int_in, int_temp, i, div, isneg;
-	
-	int_input = va_arg(ptr, int);
+	unsigned int int_in, int_tmp, count, dv, isn;
 
-	isneg = 0;
+	in = va_arg(ptr, int);
 
-	if (int_input < 0)
+	isn = 0;
+
+	if (in < 0)
 	{
-		int_in = int_input * -1;
+		int_in = in * -1;
 		write(1, "-", 1);
-		isneg = 1;
+		isn = 1;
 	}
 	else
 	{
-		int_in = int_input;
+		int_in = in;
 	}
 
-	int_temp = int_in;
-	div = 1;
+	int_tmp = int_in;
+	dv = 1;
 
-	while (int_temp > 9)
+	while (int_tmp > 9)
 	{
-		div *= 10;
-		int_temp /= 10;
+		dv *= 10;
+		int_tmp /= 10;
 	}
 
-	for (i = 0; div > 0; div /= 10, i++)
+	for (count = 0; dv > 0; dv /= 10, count++)
 	{
-		char c = ((int_in / div) % 10) + '0';
-		
+		char c = ((int_in / dv) % 10) + '0';
+
 		write(1, &c, 1);
 	}
-	return (i + isneg);
+	return (count + isn);
 }
